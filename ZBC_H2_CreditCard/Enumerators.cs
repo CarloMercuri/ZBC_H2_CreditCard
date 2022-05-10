@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZBC_H2_CreditCard
 {
-   public enum CardType
+   public enum CardName
    {
         VISAElectron =1,
         VISA = 2,
@@ -12,4 +12,10 @@ namespace ZBC_H2_CreditCard
         MAESTRO = 4,
         HAVE = 5
    }
+
+    public enum CardType
+    {
+        Debit = 1,
+        Credit = 2,
+    }
 }

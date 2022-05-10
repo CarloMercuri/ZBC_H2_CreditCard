@@ -11,6 +11,11 @@ namespace ZBC_H2_CreditCard
         protected string LastName { get; set; }
         protected string AccountNumber { get; set; }
         protected string CardName { get; set; }
+        protected CardType CardType { get; set; }
+        protected int MonthlyLimit { get; set; }
+        protected int MonthlyUsage { get; set; }
+        protected int ExpirationYear { get; set; }
+        protected int ExpirationMonth { get; set; }
 
         protected string[] cardPrefixes { get; set; }
 
@@ -22,6 +27,10 @@ namespace ZBC_H2_CreditCard
             this.cardPrefixes = prefixes;            
         }
 
+        /// <summary>
+        /// Generates a random card number with the specified prefixes
+        /// </summary>
+        /// <param name="lenght"></param>
         public void GenerateCardNumber(int lenght)
         {
             Random rand = new Random();
@@ -37,24 +46,58 @@ namespace ZBC_H2_CreditCard
             CardNumber = builder.ToString();
         }
 
+        /// <summary>
+        /// Returns the type of card (debit or credit)
+        /// </summary>
+        /// <returns></returns>
+        public string GetCardType()
+        {
+            return Enum.GetName(typeof(CardType), CardType);
+        }
+
+        /// <summary>
+        /// Returns the full name of the owner
+        /// </summary>
+        /// <returns></returns>
         public string GetFullName()
         {
             return $"{FirstName} {LastName}";
         }
 
+        /// <summary>
+        /// Returns the card number
+        /// </summary>
+        /// <returns></returns>
         public string GetCardNumber()
         {
             return CardNumber;
         }
 
+        /// <summary>
+        /// Returns the name of the card (Maestro, Mastercard, etc...)
+        /// </summary>
+        /// <returns></returns>
         public string GetCardName()
         {
             return CardName;
         }
 
+        /// <summary>
+        /// Returns the account number connected to this card
+        /// </summary>
+        /// <returns></returns>
         public string GetAccountNumber()
         {
             return AccountNumber;
+        }
+
+        /// <summary>
+        /// Returns the expiration date in yyyy-MM format
+        /// </summary>
+        /// <returns></returns>
+        public virtual string GetExpirationDate()
+        {
+            return $"{ExpirationYear}-{ExpirationMonth}";
         }
 
     }

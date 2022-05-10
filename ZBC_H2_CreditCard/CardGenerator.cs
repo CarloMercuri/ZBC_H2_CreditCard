@@ -7,6 +7,11 @@ namespace ZBC_H2_CreditCard
 {
     public class CardGenerator
     {
+        public CardGenerator()
+        {
+        }
+
+
         private string[] visaElectron_Prefixes = new string[]
         {
             "4026",
@@ -50,36 +55,43 @@ namespace ZBC_H2_CreditCard
             "2400"
         };
 
-        public BankCard GenerateCard(CardType type)
+        /// <summary>
+        /// Generates a card, based on the type, and connected to an account
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="accountNumber"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <returns></returns>
+        public BankCard GenerateCard(CardName type, string accountNumber, string firstName, string lastName)
         {
             BankCard card = null;
 
             switch (type)
             {
-                case CardType.VISAElectron:
-                    card = new VisaElectronCard("Carlo", "Mercuri", "2020", visaElectron_Prefixes);
+                case CardName.VISAElectron:
+                    card = new VisaElectronCard(firstName, lastName, accountNumber, visaElectron_Prefixes);
                     break;
 
-                    case CardType.VISA:
-                    card = new VisaCard("Carlo", "Mercuri", "2020", visa_Prefixes);
+                    case CardName.VISA:
+                    card = new VisaCard(firstName, lastName, accountNumber, visa_Prefixes);
                     break;
 
-                case CardType.MASTERCARD:
-                    card = new MasterCard("Carlo", "Mercuri", "2020", masterCard_Prefixes);
+                case CardName.MASTERCARD:
+                    card = new MasterCard(firstName, lastName, accountNumber, masterCard_Prefixes);
                     break;
 
-                case CardType.MAESTRO:
-                    card = new MaestroCard("Carlo", "Mercuri", "2020", maestro_Prefixes);
+                case CardName.MAESTRO:
+                    card = new MaestroCard(firstName, lastName, accountNumber, maestro_Prefixes);
                     break;
 
-                case CardType.HAVE:
-                    card = new HavekortCard("Carlo", "Mercuri", "2020", haveKort_Prefixes);
+                case CardName.HAVE:
+                    card = new HavekortCard(firstName, lastName, accountNumber, haveKort_Prefixes);
                     break;
             }
 
             return card;
             
-        }
-
+        }     
     }
 }
