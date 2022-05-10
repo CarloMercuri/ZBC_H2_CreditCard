@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZBC_H2_CreditCard.Cards
 {
-    public class MasterCard : BankCard, IBankCard
+    public class MasterCard : BankCard
     {  
 
         public MasterCard(string firstName, string lastName, string accountNumber, string[] prefixes) : base(firstName, lastName, accountNumber, prefixes)
@@ -19,7 +19,7 @@ namespace ZBC_H2_CreditCard.Cards
             base.GenerateCardNumber(16);
         }
 
-        public int GetMonthlyLimitRemaining()
+        public override int GetMonthlyLimitRemaining()
         {
             return MonthlyLimit - MonthlyUsage;
         }

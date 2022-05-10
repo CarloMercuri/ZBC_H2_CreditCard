@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZBC_H2_CreditCard
 {
-    public class MaestroCard : BankCard, IBankCard
+    public class MaestroCard : BankCard
     {
         public MaestroCard(string firstName, string lastName, string accountNumber, string[] prefixes) : base(firstName, lastName, accountNumber, prefixes)
         {
@@ -19,7 +19,7 @@ namespace ZBC_H2_CreditCard
             base.GenerateCardNumber(19);
         }
 
-        public int GetMonthlyLimitRemaining()
+        public override int GetMonthlyLimitRemaining()
         {
             return -1; // Debit
         }

@@ -100,5 +100,6 @@ namespace ZBC_H2_CreditCard
             return $"{ExpirationYear}-{ExpirationMonth}";
         }
 
+        public abstract int GetMonthlyLimitRemaining();
     }
 }
