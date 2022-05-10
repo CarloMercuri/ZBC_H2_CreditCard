@@ -6,12 +6,11 @@ namespace ZBC_H2_CreditCard
 {
     public abstract class BankCard
     {
-        protected string CardNumber { get; set; }
-        protected string FirstName { get; set; }
-        protected string LastName { get; set; }
-        protected string AccountNumber { get; set; }
-        protected int MonthlyLimit { get; set; }
-        protected int MonthlyUsage { get; set; }
+        string CardNumber { get; set; }
+        string FirstName { get; set; }
+        string LastName { get; set; }
+        string AccountNumber { get; set; }
+        int MonthlyUsage { get; set; }
 
         protected string[] cardPrefixes { get; set; }
 

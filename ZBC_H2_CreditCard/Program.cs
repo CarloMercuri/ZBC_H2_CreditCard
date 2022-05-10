@@ -9,6 +9,10 @@ namespace ZBC_H2_CreditCard
     {
         static void Main(string[] args)
         {
+            test();
+
+            Console.ReadKey();
+
             BankController bankController = new BankController();
             Random rand = new Random();
 
@@ -41,9 +45,11 @@ namespace ZBC_H2_CreditCard
             Console.ReadKey();
         }
 
-        private void test()
+        static void test()
         {
-            AccountCard card = new MaestroCard("c");
+            CardGenerator generator = new CardGenerator();
+            BankCard c = generator.GenerateCard(CardName.MASTERCARD, "4020", "soso", "coco");
+            Console.WriteLine(c.GetCardNumber());
         }
     }
 }
