@@ -81,9 +81,9 @@ namespace ZBC_H2_CreditCard
                     card = new MasterCard(firstName, lastName, accountNumber, masterCard_Prefixes);
                     break;
 
-                case CardName.MAESTRO:
-                    card = new MaestroCard(firstName, lastName, accountNumber, maestro_Prefixes);
-                    break;
+                //case CardName.MAESTRO:
+                //    card = new MaestroCard(firstName, lastName, accountNumber, maestro_Prefixes);
+                //    break;
 
                 case CardName.HAVE:
                     card = new HavekortCard(firstName, lastName, accountNumber, haveKort_Prefixes);

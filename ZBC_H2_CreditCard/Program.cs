@@ -40,5 +40,10 @@ namespace ZBC_H2_CreditCard
 
             Console.ReadKey();
         }
+
+        private void test()
+        {
+            AccountCard card = new MaestroCard("c");
+        }
     }
 }

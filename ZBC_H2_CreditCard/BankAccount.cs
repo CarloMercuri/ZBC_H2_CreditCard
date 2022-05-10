@@ -111,7 +111,7 @@ namespace ZBC_H2_CreditCard
 
             foreach(BankCard card in cards)
             {
-                sb.Append($"Card name: {card.GetCardName()}\n\r");
+                //sb.Append($"Card name: {card.GetCardName()}\n\r");
                 sb.Append($"Card type: {card.GetCardType()}\n\r");
                 sb.Append($"Card number: {card.GetCardNumber()}\n\r");
                 sb.Append($"Card withdrawal remaining: " + (card.GetMonthlyLimitRemaining() == -1? balance : card.GetMonthlyLimitRemaining()) + "\n\r");

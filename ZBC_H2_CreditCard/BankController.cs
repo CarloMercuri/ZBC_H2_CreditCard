@@ -60,9 +60,8 @@ namespace ZBC_H2_CreditCard
         /// <returns></returns>
         private string GenerateAccountNumber()
         {            
-            string tempNumber = "3520";
+            string tempNumber = "3520";           
             Random rand = new Random();
-
             StringBuilder builder = new StringBuilder(tempNumber);
 
             while (builder.Length < 14)

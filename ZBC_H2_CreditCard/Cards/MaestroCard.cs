@@ -1,27 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZBC_H2_CreditCard.Interfaces;
 
 namespace ZBC_H2_CreditCard
 {
-    public class MaestroCard : BankCard
+    public abstract class MaestroCard : BankCard, ICardLimit
     {
+        int CardLimit;
+
         public MaestroCard(string firstName, string lastName, string accountNumber, string[] prefixes) : base(firstName, lastName, accountNumber, prefixes)
         {
-            CardName = "Maestro";
-            CardType = CardType.Debit;
+            CardLimit = 15;
             MonthlyLimit = 0;
-
             DateTime exp = DateTime.Now.AddYears(5).AddMonths(8);
-            ExpirationYear = exp.Year;
-            ExpirationMonth = exp.Month;
 
             base.GenerateCardNumber(19);
         }
 
-        public override int GetMonthlyLimitRemaining()
-        {
-            return -1; // Debit
-        }
+        int ICardLimit.MonthlyLimit { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

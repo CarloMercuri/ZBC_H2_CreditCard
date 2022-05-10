@@ -10,12 +10,8 @@ namespace ZBC_H2_CreditCard
         protected string FirstName { get; set; }
         protected string LastName { get; set; }
         protected string AccountNumber { get; set; }
-        protected string CardName { get; set; }
-        protected CardType CardType { get; set; }
         protected int MonthlyLimit { get; set; }
         protected int MonthlyUsage { get; set; }
-        protected int ExpirationYear { get; set; }
-        protected int ExpirationMonth { get; set; }
 
         protected string[] cardPrefixes { get; set; }
 
@@ -52,7 +48,7 @@ namespace ZBC_H2_CreditCard
         /// <returns></returns>
         public string GetCardType()
         {
-            return Enum.GetName(typeof(CardType), CardType);
+            return "";
         }
 
         /// <summary>
@@ -74,15 +70,6 @@ namespace ZBC_H2_CreditCard
         }
 
         /// <summary>
-        /// Returns the name of the card (Maestro, Mastercard, etc...)
-        /// </summary>
-        /// <returns></returns>
-        public string GetCardName()
-        {
-            return CardName;
-        }
-
-        /// <summary>
         /// Returns the account number connected to this card
         /// </summary>
         /// <returns></returns>
@@ -95,11 +82,14 @@ namespace ZBC_H2_CreditCard
         /// Returns the expiration date in yyyy-MM format
         /// </summary>
         /// <returns></returns>
-        public virtual string GetExpirationDate()
+        public string GetExpirationDate()
         {
-            return $"{ExpirationYear}-{ExpirationMonth}";
+            return "";
         }
 
-        public abstract int GetMonthlyLimitRemaining();
+        public int GetMonthlyLimitRemaining()
+        {
+            return 1;
+        }
     }
 }
