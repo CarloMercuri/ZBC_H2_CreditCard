@@ -57,15 +57,7 @@ namespace ZBC_H2_CreditCard
 
         public string GetCardExpiration(BankCard card)
         {
-            if(card is ICardExpiration)
-            {
-                ICardExpiration expiration = (ICardExpiration)card;
-                return expiration.ExpirationYear + "-" + expiration.ExpirationMonth;
-            }
-            else
-            {
-                return "n/a";
-            }
+            return card.GetExpirationDate();
         }
 
         public bool UseCardOnline(BankCard card, int amount)

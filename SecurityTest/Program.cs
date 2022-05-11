@@ -12,8 +12,6 @@ namespace SecurityTest
             BankCard card = g.GenerateCard(CardName.MAESTRO, "ss", "ss", "ss");
             BankController controller = new BankController();
             MaestroCard c = card as MaestroCard;
-            bool success = c.UseMoney(3000);
-            Console.WriteLine(success? "Success" : "Fail");
             string s2 = controller.GetCardExpiration(card);
             Console.WriteLine($"Direct: {c.ExpirationYear}");
             Console.WriteLine($"From controller: {s2}");
