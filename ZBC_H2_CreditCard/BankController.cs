@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZBC_H2_CreditCard.Interfaces;
 
 namespace ZBC_H2_CreditCard
 {
@@ -52,6 +53,114 @@ namespace ZBC_H2_CreditCard
         {
             BankCard card = _cardGenerator.GenerateCard(cardName, account.AccountNumber, account.FirstName, account.LastName);
             account.AddCard(card);
+        }
+
+        public string GetCardExpiration(BankCard card)
+        {
+            if(card is ICardExpiration)
+            {
+                ICardExpiration expiration = (ICardExpiration)card;
+                return expiration.ExpirationYear + "-" + expiration.ExpirationMonth;
+            }
+            else
+            {
+                return "n/a";
+            }
+        }
+
+        public bool UseCardOnline(BankCard card, int amount)
+        {
+            bool active = card is ICardActive;
+            bool international = card is ICardInternational;
+
+            if (!active || !international)
+            {
+                return false;
+            }
+
+            BankAccount account = _bankAccounts.Find(x => x.AccountNumber == card.GetAccountNumber());
+
+            if (card is IDebitCard)
+            {
+                if (amount < account.Balance)
+                {
+                    account.Balance -= amount;
+                    return true;
+                }
+
+                return false;
+            }
+
+            if (card is ICreditCard)
+            {
+                if (card is ICardMonthlyLimit)
+                {
+                    ICardMonthlyLimit cardLimit = card as ICardMonthlyLimit;
+
+                    if (cardLimit.MonthlyLimit - amount > 0)
+                    {
+                        card.AddToMonthlyUsage(amount);
+                        account.Balance -= amount;
+                        return true;
+                    }
+
+                    return false;
+                }
+                else
+                {
+                    account.Balance -= amount;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool UseCard(BankCard card, int amount)
+        {
+            bool active = card is ICardActive;
+
+            if(!active)
+            {
+                return false;
+            }
+
+            BankAccount account = _bankAccounts.Find(x => x.AccountNumber == card.GetAccountNumber());
+
+            if (card is IDebitCard)
+            {
+                if (amount < account.Balance)
+                {
+                    account.Balance -= amount;
+                    return true;
+                }
+
+                return false;
+            }
+
+            if(card is ICreditCard)
+            {
+                if(card is ICardMonthlyLimit)
+                {
+                    ICardMonthlyLimit cardLimit = card as ICardMonthlyLimit;
+
+                    if(cardLimit.MonthlyLimit - amount > 0)
+                    {
+                        account.Balance -= amount;
+                        card.AddToMonthlyUsage(amount);
+                        return true;
+                    }
+
+                    return false;
+                }
+                else
+                {
+                    account.Balance -= amount;
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>

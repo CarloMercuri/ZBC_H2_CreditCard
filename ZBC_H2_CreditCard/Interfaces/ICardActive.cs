@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZBC_H2_CreditCard.Interfaces
 {
-    public interface IBankExpiration
+    internal interface ICardActive
     {
     }
 }

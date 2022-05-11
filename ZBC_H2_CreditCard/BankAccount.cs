@@ -113,8 +113,11 @@ namespace ZBC_H2_CreditCard
             {
                 //sb.Append($"Card name: {card.GetCardName()}\n\r");
                 sb.Append($"Card type: {card.GetCardType()}\n\r");
+                sb.Append($"Card Name: {card.GetCardName()}\n\r");
                 sb.Append($"Card number: {card.GetCardNumber()}\n\r");
-                sb.Append($"Card withdrawal remaining: " + (card.GetMonthlyLimitRemaining() == -1? balance : card.GetMonthlyLimitRemaining()) + "\n\r");
+                sb.Append($"Card is active: {(card.IsActive() ? "Yes" : "No")}\n\r");
+                sb.Append($"Can be used internationally: {(card.CanUseInternationally() ? "Yes" : "No")}\n\r");
+                sb.Append($"Card Expiration: {card.GetExpirationDate()}\n\r");
                 sb.Append("\n\r");
                 sb.Append("-----------");
                 sb.Append("\n\r");

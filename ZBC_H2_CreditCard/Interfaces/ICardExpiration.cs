@@ -4,8 +4,9 @@ using System.Text;
 
 namespace ZBC_H2_CreditCard.Interfaces
 {
-    public interface ICardLimit
+    internal interface ICardExpiration
     {
-        int MonthlyLimit { get; protected set; }
+        public int ExpirationYear { get; }
+        public int ExpirationMonth { get; }
     }
 }

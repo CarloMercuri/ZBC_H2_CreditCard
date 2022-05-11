@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZBC_H2_CreditCard", "ZBC_H2_CreditCard\ZBC_H2_CreditCard.csproj", "{76DC780A-F7E8-4D0E-9AF9-0245F746D858}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZBC_H2_CreditCard", "ZBC_H2_CreditCard\ZBC_H2_CreditCard.csproj", "{76DC780A-F7E8-4D0E-9AF9-0245F746D858}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityTest", "SecurityTest\SecurityTest.csproj", "{0986FC4D-9A78-4625-8B98-6FCA92172EF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{76DC780A-F7E8-4D0E-9AF9-0245F746D858}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76DC780A-F7E8-4D0E-9AF9-0245F746D858}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76DC780A-F7E8-4D0E-9AF9-0245F746D858}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0986FC4D-9A78-4625-8B98-6FCA92172EF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0986FC4D-9A78-4625-8B98-6FCA92172EF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0986FC4D-9A78-4625-8B98-6FCA92172EF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0986FC4D-9A78-4625-8B98-6FCA92172EF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
