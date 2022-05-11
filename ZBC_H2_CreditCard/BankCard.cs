@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZBC_H2_CreditCard.Interfaces;
 
 namespace ZBC_H2_CreditCard
 {
     public abstract class BankCard
     {
-        protected string CardNumber { get; set; }
-        protected string FirstName { get; set; }
-        protected string LastName { get; set; }
-        protected string AccountNumber { get; set; }
-        protected string CardName { get; set; }
-        protected CardType CardType { get; set; }
-        protected int MonthlyLimit { get; set; }
-        protected int MonthlyUsage { get; set; }
-        protected int ExpirationYear { get; set; }
-        protected int ExpirationMonth { get; set; }
+        string CardNumber { get; set; }
+        string FirstName { get; set; }
+        string LastName { get; set; }
+        string AccountNumber { get; set; }
+        int MonthlyUsage { get; set; }
 
         protected string[] cardPrefixes { get; set; }
 
@@ -25,6 +21,11 @@ namespace ZBC_H2_CreditCard
             this.LastName = lastName;
             this.AccountNumber = accountNumber;
             this.cardPrefixes = prefixes;            
+        }
+
+        public void AddToMonthlyUsage(int amount)
+        {
+            this.MonthlyUsage += amount;
         }
 
         /// <summary>
@@ -46,13 +47,43 @@ namespace ZBC_H2_CreditCard
             CardNumber = builder.ToString();
         }
 
+        public bool UseMoney(int amount)
+        {
+            BankController controller = new BankController();
+            return controller.UseCard(this, amount);
+        }
+
+        public bool OnlinePayment(int amount)
+        {
+            BankController controller = new BankController();
+            return controller.UseCardOnline(this, amount);
+        }
+
         /// <summary>
         /// Returns the type of card (debit or credit)
         /// </summary>
         /// <returns></returns>
         public string GetCardType()
         {
-            return Enum.GetName(typeof(CardType), CardType);
+            if(this is IDebitCard)
+            {
+                return "Debit";
+            }
+            else if(this is ICreditCard)
+            {
+                return "Credit";
+            }
+
+            return "n/a";
+        }
+
+        /// <summary>
+        /// Returns the name of the card (Maestro, visa, etc)
+        /// </summary>
+        /// <returns></returns>
+        public string GetCardName()
+        {
+           return this.GetType().Name;
         }
 
         /// <summary>
@@ -73,13 +104,27 @@ namespace ZBC_H2_CreditCard
             return CardNumber;
         }
 
-        /// <summary>
-        /// Returns the name of the card (Maestro, Mastercard, etc...)
-        /// </summary>
-        /// <returns></returns>
-        public string GetCardName()
+        public bool CanUseInternationally()
         {
-            return CardName;
+            return (this is ICardInternational);
+        }
+
+        public bool IsActive()
+        {
+            return (this is ICardActive);
+        }
+
+        public string GetExpirationDate()
+        {
+            if(this is ICardExpiration)
+            {
+                ICardExpiration expiration = (ICardExpiration)this;
+                return expiration.ExpirationYear + "-" + expiration.ExpirationMonth;
+            }
+            else
+            {
+                return "n/a";
+            }
         }
 
         /// <summary>
@@ -91,15 +136,10 @@ namespace ZBC_H2_CreditCard
             return AccountNumber;
         }
 
-        /// <summary>
-        /// Returns the expiration date in yyyy-MM format
-        /// </summary>
-        /// <returns></returns>
-        public virtual string GetExpirationDate()
-        {
-            return $"{ExpirationYear}-{ExpirationMonth}";
-        }
 
-        public abstract int GetMonthlyLimitRemaining();
+        public int GetMonthlyLimitRemaining()
+        {
+            return 1;
+        }
     }
 }
